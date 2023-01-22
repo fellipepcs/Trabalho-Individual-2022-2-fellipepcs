@@ -9,7 +9,7 @@ services:
     depends_on:
       - mongo
 
-  mongo-database:
+  mongo:
     image: mongo:latest
     container_name: mongo-db
     restart: always

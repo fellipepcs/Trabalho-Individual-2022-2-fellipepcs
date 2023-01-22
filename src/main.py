@@ -6,14 +6,14 @@ from parser.model_parser import ModelParser
 
 if __name__ != "__main__":
     exit()   
-
+    
 def get_config():
     initialParser = YAMLParser
     featureEngineringParser = FeatureEngineeringParser
     modelParser = ModelParser
 
-    for file in os.listdir('/yamls'):
-        filepath = os.path.join('/yamls', file)
+    for file in os.listdir('src/yamls'):
+        filepath = os.path.join('src/yamls', file)
         config = initialParser(filepath).parse()
     
         features_configs, columns_set_alias = featureEngineringParser(filepath).parse(config['feature_engineering'])
