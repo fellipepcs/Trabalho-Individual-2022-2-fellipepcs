@@ -3,7 +3,6 @@ version: '3.8'
 services:
   app:
     build: .
-    command: python src/main.py
     volumes:
       - .:/app
     depends_on:
@@ -18,3 +17,14 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: lappis
     ports:
       - 3000:3000
+  
+  metabase:
+    image: metabase/metabase
+    ports:
+      - 3002:3000
+    env_file:
+       - metabase/config/mongo_exemple.env
+    depends_on:
+      - mongo
+
+   
