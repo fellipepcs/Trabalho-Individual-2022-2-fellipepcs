@@ -1,30 +1,24 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    volumes:
-      - .:/app
-    depends_on:
-      - mongo
-
-  mongo:
-    image: mongo:latest
-    container_name: mongo-db
+  postgres:
+    image: postgres
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: lappis
-      MONGO_INITDB_ROOT_PASSWORD: lappis
-    ports:
-      - 3000:3000
-  
+    container_name: postgres
+    env_file:
+      - metabase/config/postgres_exemple.env
+
   metabase:
     image: metabase/metabase
     ports:
-      - 3002:3000
+      - 3001:3000
     env_file:
-       - metabase/config/mongo_exemple.env
+      - metabase/config/metabase_database_exemple.env
     depends_on:
-      - mongo
+      - postgres
 
-   
+  lib:
+    build: .
+    env_file:
+      - .env
+    command: bash -c "poetry config pypi-token.pypi ${TOKEN_PYPI} && poetry version ${VERSION} && poetry build && poetry publish"
