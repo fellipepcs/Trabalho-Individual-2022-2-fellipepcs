@@ -1,4 +1,4 @@
-LAMECORNO
+TESTE
 ====================
 
 .. automodule:: main
