@@ -47,5 +47,5 @@ jobs:
 
     - name: Publicação do trabalho e documentação
       run: |
-        poetry config pypi-token.pypi ${{TOKEN_PYPI }}
+        poetry config pypi-token.pypi ${{secrets.TOKEN_PYPI }}
         poetry publish --username __token__ -v
