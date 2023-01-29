@@ -24,11 +24,6 @@ jobs:
     - name: Atualizando e instalando Poetry e suas dependências
       run: python -m pip install poetry
 
-    - name: Update version pyproject
-      run: |
-        pip install requests
-        python update_version.py
-
     - name: Instalando dependencias
       run: |
         poetry install
