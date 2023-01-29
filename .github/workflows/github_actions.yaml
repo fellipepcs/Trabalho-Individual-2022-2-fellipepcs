@@ -33,14 +33,21 @@ jobs:
         pip install pylint
         pylint src
       continue-on-error: true
-
+      
+    - name: baixando Sphinx
+      run: sudo apt install --allow-unauthenticated python3-sphinx -y
+    
+    - name: Criando doc
+      run: sphinx-build -b html my_library/source my_library/build/
+    
     - name: Executar testes unitários
       run: poetry run pytest --cov 
 
     - name: Build pacotes de dependencias do poetry
       run: poetry build -v
-
-    - name: Publicação do trabalho e documentação
+    
+    - name: Publicação no PyPI
       run: |
-        poetry config pypi-token.pypi ${{secrets.TOKEN_PYPI }}
+        poetry config pypi-token.pypi ${{ secrets.TOKEN_PYPI }}
         poetry publish --username __token__ -v
+  
