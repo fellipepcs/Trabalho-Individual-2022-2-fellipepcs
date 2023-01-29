@@ -33,6 +33,9 @@ jobs:
         pip install pylint
         pylint src
       continue-on-error: true
+      
+    - name: baixando Sphinx
+      run: sudo apt install --allow-unauthenticated python3-sphinx -y
     
     - name: Criando doc
       run: sphinx-build -b html my_library/source my_library/build/
