@@ -1,1 +1,51 @@
 
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cópiando dados da master
+      uses: actions/checkout@v2
+
+    - name: Instalando python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Atualizando e instalando Poetry e suas dependências
+      run: python -m pip install poetry
+
+    - name: Update version pyproject
+      run: |
+        pip install requests
+        python update_version.py
+
+    - name: Instalando dependencias
+      run: |
+        poetry install
+
+    - name: Instalando lint
+      run: |
+        pip install pylint
+        pylint src
+      continue-on-error: true
+
+    - name: Executar testes unitários
+      run: poetry run pytest --cov 
+
+    - name: Build pacotes de dependencias do poetry
+      run: poetry build -v
+
+    - name: Publicação do trabalho e documentação
+      run: |
+        poetry config pypi-token.pypi ${{TOKEN_PYPI }}
+        poetry publish --username __token__ -v
