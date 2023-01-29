@@ -44,10 +44,9 @@ jobs:
       run: poetry run pytest --cov 
 
     - name: Build pacotes de dependencias do poetry
-      run: poetry build -v
+      run: poetry build 
     
     - name: Publicação no PyPI
       run: |
-        poetry config pypi-token.pypi ${{ secrets.TOKEN_PYPI }}
-        poetry publish --username __token__ -v
+        poetry publish --username __token__ --password $PYPI_TOKEN
   
