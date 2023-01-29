@@ -46,8 +46,10 @@ jobs:
     - name: Build pacotes de dependencias do poetry
       run: poetry build -v
     
-    - name: Publicação no PyPI
+    - name: Config poetry
+      run: poetry config http-basic.pypi ${{ secrets.PYPI_USER }} ${{ secrets.PYPI_PASSWORD }}
+
+    - name: Poetry build and publish
       run: |
-        poetry config pypi-token.pypi ${{ secrets.TOKEN_PYPI }}
-        poetry publish --username __token__ -v
-  
+        poetry build
+        poetry publish
