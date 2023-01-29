@@ -26,9 +26,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install poetry
         poetry install
-
-    - name: Build pacotes de dependencias do poetry
-      run: poetry build -v
     
     - name: Config poetry
       run: poetry config http-basic.pypi ${{ secrets.PYPI_USER }} ${{ secrets.PYPI_PASSWORD }}
