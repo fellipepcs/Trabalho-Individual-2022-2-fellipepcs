@@ -33,7 +33,10 @@ jobs:
         pip install pylint
         pylint src
       continue-on-error: true
-
+    
+    - name: Criando doc
+      run: sphinx-build -b html my_library/source my_library/build/
+    
     - name: Executar testes unitários
       run: poetry run pytest --cov 
 
