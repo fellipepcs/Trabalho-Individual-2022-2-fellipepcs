@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Key Smash &#8212; trabalho-final-fellipepcs  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Word Embedding" href="word_embedding.html" />
+    <link rel="prev" title="Data pipeline" href="modules_data_pipeline.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-data_pipeline.feature_engineering.key_smash">
+<span id="key-smash"></span><h1>Key Smash<a class="headerlink" href="#module-data_pipeline.feature_engineering.key_smash" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="data_pipeline.feature_engineering.key_smash.KeySmash">
+<em class="property">class </em><code class="descclassname">data_pipeline.feature_engineering.key_smash.</code><code class="descname">KeySmash</code><a class="reference internal" href="_modules/data_pipeline/feature_engineering/key_smash.html#KeySmash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_pipeline.feature_engineering.key_smash.KeySmash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for calculating metrics to indicate key smashing behavior in a text.</p>
+<p>Key smashing is the act of typing on a keyboard in a rapid and uncontrolled manner,
+often resulting in a series of random characters being entered into a document or text field.</p>
+<dl class="method">
+<dt id="data_pipeline.feature_engineering.key_smash.KeySmash.calculate_char_frequency_metric">
+<code class="descname">calculate_char_frequency_metric</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_pipeline/feature_engineering/key_smash.html#KeySmash.calculate_char_frequency_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_pipeline.feature_engineering.key_smash.KeySmash.calculate_char_frequency_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Char Frequency Metric.</p>
+<dl class="docutils">
+<dt>text <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The text to use for the calculation.</dd>
+</dl>
+<dl class="docutils">
+<dt>float</dt>
+<dd>Char Frequency Metric.</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_char_frequency_metric</span><span class="p">(</span><span class="s2">&quot;PUENTECILLA KM. 1.7&quot;</span><span class="p">)</span>
+<span class="go">1.121212121212121</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_char_frequency_metric</span><span class="p">(</span><span class="s2">&quot;ASDASD XXXX&quot;</span><span class="p">)</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="data_pipeline.feature_engineering.key_smash.KeySmash.calculate_irregular_sequence_metric">
+<code class="descname">calculate_irregular_sequence_metric</code><span class="sig-paren">(</span><em>text</em>, <em>opt</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_pipeline/feature_engineering/key_smash.html#KeySmash.calculate_irregular_sequence_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_pipeline.feature_engineering.key_smash.KeySmash.calculate_irregular_sequence_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Irregular Sequence Metric.</p>
+<dl class="docutils">
+<dt>text <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The text to use for the calculation.</dd>
+<dt>opt <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The type of characters to consider for the calculation,
+can be one of ‘vowels’, ‘consonants’, or ‘special_characters’.</dd>
+</dl>
+<dl class="docutils">
+<dt>float</dt>
+<dd>Irregular Sequence Metric.</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_irregular_sequence_metric</span><span class="p">(</span><span class="s2">&quot;PUENTECILLA KM. 1.7&quot;</span><span class="p">,</span> <span class="s2">&quot;vowels&quot;</span><span class="p">)</span>
+<span class="go">0.21052631578947367</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_irregular_sequence_metric</span><span class="p">(</span><span class="s2">&quot;ASDASD XXXX&quot;</span><span class="p">,</span> <span class="s2">&quot;consonants&quot;</span><span class="p">)</span>
+<span class="go">2.1818181818181817</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_irregular_sequence_metric</span><span class="p">(</span><span class="s2">&quot;!@#$% ASDFGHJKL&quot;</span><span class="p">,</span> <span class="s2">&quot;special_characters&quot;</span><span class="p">)</span>
+<span class="go">1.5625</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="data_pipeline.feature_engineering.key_smash.KeySmash.calculate_number_count_metric">
+<code class="descname">calculate_number_count_metric</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data_pipeline/feature_engineering/key_smash.html#KeySmash.calculate_number_count_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#data_pipeline.feature_engineering.key_smash.KeySmash.calculate_number_count_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Number Count Metric.</p>
+<dl class="docutils">
+<dt>text <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The text field to use for the calculation.</dd>
+</dl>
+<dl class="docutils">
+<dt>float</dt>
+<dd>Number Count Metric.</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_number_count_metric</span><span class="p">(</span><span class="s2">&quot;ABC 123 !@#&quot;</span><span class="p">)</span>
+<span class="go">0.0 </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_number_count_metric</span><span class="p">(</span><span class="s2">&quot;ABC123 !@#&quot;</span><span class="p">)</span>
+<span class="go">0.9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">trabalho-final-fellipepcs</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules_data_pipeline.html">Data pipeline</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Key Smash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="word_embedding.html">Word Embedding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules_parser.html">Parser modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules_data_pipeline.html">Data pipeline</a><ul>
+      <li>Previous: <a href="modules_data_pipeline.html" title="previous chapter">Data pipeline</a></li>
+      <li>Next: <a href="word_embedding.html" title="next chapter">Word Embedding</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, fellipy.02@hotmail.com.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/key_smash.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

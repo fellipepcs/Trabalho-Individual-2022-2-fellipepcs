@@ -1,0 +1,27 @@
+# Doxyfile 1.8.16
+
+# Project information
+PROJECT_NAME           = "My Library"
+PROJECT_NUMBER         = "1.0"
+PROJECT_BRIEF          = "A simple library for demonstration purposes"
+
+# Output options
+OUTPUT_DIRECTORY       = "doc"
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+
+# Input options
+FILE_PATTERNS          = *.h *.cpp
+RECURSIVE              = YES
+EXCLUDE                = test/
+
+# Source code browser options
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+
+# Extra documentation
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES

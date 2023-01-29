@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    env_file:
+      - metabase/config/postgres_exemple.env
+
+  metabase:
+    image: metabase/metabase
+    ports:
+      - 3001:3000
+    env_file:
+      - metabase/config/metabase_database_exemple.env
+    depends_on:
+      - postgres
+
+  poetry:
+    build: .
+    env_file:
+      - .env
+    command: bash -c "poetry config pypi-token.pypi ${TOKEN_PYPI} && poetry version ${VERSION} && poetry build && poetry publish"
