@@ -21,19 +21,12 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install poetry
-      run: |
-        python -m pip install --upgrade pip
-        pip install poetry
-        poetry install
-    
-    - name: Config poetry
-      run: poetry config http-basic.pypi ${{ secrets.PYPI_USER }} ${{ secrets.PYPI_PASSWORD }}
+    - name: Atualizando e instalando Poetry e suas dependências
+      run: python -m pip install poetry
 
-    - name: Poetry build and publish
+    - name: Instalando dependencias
       run: |
-        poetry build
-        poetry publish
+        poetry install
 
     - name: Instalando lint
       run: |
@@ -46,6 +39,15 @@ jobs:
     
     - name: Criando doc
       run: sphinx-build -b html my_library/source my_library/build/
-
+    
     - name: Executar testes unitários
       run: poetry run pytest --cov 
+
+    - name: Build pacotes de dependencias do poetry
+      run: poetry build -v
+    
+    - name: Publicação no PyPI
+      run: |
+        poetry config pypi-token.pypi ${{ secrets.TOKEN_PYPI }}
+        poetry publish --username __token__ -v
+  
