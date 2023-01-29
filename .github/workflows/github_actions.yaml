@@ -21,13 +21,6 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Atualizando e instalando Poetry e suas dependências
-      run: python -m pip install poetry
-
-    - name: Instalando dependencias
-      run: |
-        poetry install
-
     - name: Instalando lint
       run: |
         pip install pylint
@@ -46,6 +39,12 @@ jobs:
     - name: Build pacotes de dependencias do poetry
       run: poetry build -v
     
+    - name: Install poetry
+      run: |
+        python -m pip install --upgrade pip
+        pip install poetry
+        poetry install
+        
     - name: Config poetry
       run: poetry config http-basic.pypi ${{ secrets.PYPI_USER }} ${{ secrets.PYPI_PASSWORD }}
 
