@@ -42,12 +42,3 @@ jobs:
     
     - name: Executar testes unitários
       run: poetry run pytest --cov 
-
-    - name: Build package
-      run: poetry build -v
-
-    - name: Publicação no PyPI
-      run: |
-        poetry config pypi-token.pypi ${{ secrets.TOKEN_PYPI }}
-        poetry publish --username __token__ -v
-  
